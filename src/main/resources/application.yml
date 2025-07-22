@@ -1,0 +1,37 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: service3-processor
+
+# Logging
+logging:
+  level:
+    com.centime.processor: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{traceId:-}] %logger{36} - %msg%n"
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+# Server configuration
+
+  servlet:
+    context-path: /
+  error:
+    include-message: always
+
+# JSON parsing configuration
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+

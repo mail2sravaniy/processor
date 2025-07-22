@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  service3:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: service3-processor
+    ports:
+      - "8083:8083"
+    networks:
+      - microservice-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  microservice-network:
+    driver: bridge
